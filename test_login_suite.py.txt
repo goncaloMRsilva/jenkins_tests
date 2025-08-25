@@ -1,0 +1,67 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+URL = "https://the-internet.herokuapp.com/login"
+
+# Função auxiliar para iniciar browser
+def start_driver():
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    driver.get(URL)
+    return driver
+
+# Caso de teste: Login válido
+def test_login_valido():
+    driver = start_driver()
+    try:
+        driver.find_element(By.ID, "username").send_keys("tomsmith")
+        driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+        driver.find_element(By.CSS_SELECTOR, "button.radius").click()
+        time.sleep(1)
+
+        mensagem = driver.find_element(By.ID, "flash").text
+        assert "You logged into a secure area!" in mensagem
+        print("✅ [PASSOU] Login válido")
+    except Exception as e:
+        print("❌ [FALHOU] Login válido:", e)
+    finally:
+        driver.quit()
+
+# Caso de teste: Login inválido (senha errada)
+def test_login_invalido():
+    driver = start_driver()
+    try:
+        driver.find_element(By.ID, "username").send_keys("tomsmith")
+        driver.find_element(By.ID, "password").send_keys("password")
+        driver.find_element(By.CSS_SELECTOR, "button.radius").click()
+        time.sleep(1)
+
+        mensagem = driver.find_element(By.ID, "flash").text
+        assert "Your password is invalid!" in mensagem
+        print("✅ [PASSOU] Login inválido (senha errada)")
+    except Exception as e:
+        print("❌ [FALHOU] Login inválido:", e)
+    finally:
+        driver.quit()
+
+# Caso de teste: Campos vazios
+def test_login_vazio():
+    driver = start_driver()
+    try:
+        driver.find_element(By.CSS_SELECTOR, "button.radius").click()
+        time.sleep(1)
+
+        mensagem = driver.find_element(By.ID, "flash").text
+        assert "Your username is invalid!" in mensagem
+        print("✅ [PASSOU] Login vazio")
+    except Exception as e:
+        print("❌ [FALHOU] Login vazio:", e)
+    finally:
+        driver.quit()
+
+# Executar todos os testes
+if __name__ == "__main__":
+    test_login_valido()
+    test_login_invalido()
+    test_login_vazio()
