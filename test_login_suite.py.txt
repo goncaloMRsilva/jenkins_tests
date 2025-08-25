@@ -22,9 +22,9 @@ def test_login_valido():
 
         mensagem = driver.find_element(By.ID, "flash").text
         assert "You logged into a secure area!" in mensagem
-        print("✅ [PASSOU] Login válido")
+        print("[PASSOU] Login válido")
     except Exception as e:
-        print("❌ [FALHOU] Login válido:", e)
+        print("[FALHOU] Login válido:", e)
     finally:
         driver.quit()
 
@@ -39,9 +39,9 @@ def test_login_invalido():
 
         mensagem = driver.find_element(By.ID, "flash").text
         assert "Your password is invalid!" in mensagem
-        print("✅ [PASSOU] Login inválido (senha errada)")
+        print("[PASSOU] Login inválido (senha errada)")
     except Exception as e:
-        print("❌ [FALHOU] Login inválido:", e)
+        print("[FALHOU] Login inválido:", e)
     finally:
         driver.quit()
 
@@ -54,9 +54,9 @@ def test_login_vazio():
 
         mensagem = driver.find_element(By.ID, "flash").text
         assert "Your username is invalid!" in mensagem
-        print("✅ [PASSOU] Login vazio")
+        print("[PASSOU] Login vazio")
     except Exception as e:
-        print("❌ [FALHOU] Login vazio:", e)
+        print("[FALHOU] Login vazio:", e)
     finally:
         driver.quit()
 
