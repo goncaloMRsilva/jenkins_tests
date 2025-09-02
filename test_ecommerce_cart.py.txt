@@ -1,0 +1,28 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+
+def test_add_to_cart():
+    driver = webdriver.Chrome()
+    driver.get("https://www.saucedemo.com/")
+
+    # Login no site de demo
+    driver.find_element(By.ID, "user-name").send_keys("standard_user")
+    driver.find_element(By.ID, "password").send_keys("secret_sauce")
+    driver.find_element(By.ID, "login-button").click()
+
+    # Adicionar item ao carrinho
+    driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+    driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
+
+    time.sleep(2)
+
+    # Verificar se o item aparece no carrinho
+    items = driver.find_elements(By.CLASS_NAME, "inventory_item_name")
+    assert len(items) > 0, "Carrinho vazio!"
+    print("✅ [PASSOU] Item adicionado ao carrinho")
+
+    driver.quit()
+
+if __name__ == "__main__":
+    test_add_to_cart()
