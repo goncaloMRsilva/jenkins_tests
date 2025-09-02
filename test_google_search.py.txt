@@ -15,7 +15,7 @@ def test_google_search():
 
     resultados = driver.find_elements(By.CSS_SELECTOR, "h3")
     assert len(resultados) > 0, "Nenhum resultado encontrado!"
-    print("✅ [PASSOU] Pesquisa no Google retornou resultados")
+    print("[PASSOU] Pesquisa no Google retornou resultados")
 
     driver.quit()
 

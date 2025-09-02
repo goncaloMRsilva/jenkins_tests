@@ -20,7 +20,7 @@ def test_add_to_cart():
     # Verificar se o item aparece no carrinho
     items = driver.find_elements(By.CLASS_NAME, "inventory_item_name")
     assert len(items) > 0, "Carrinho vazio!"
-    print("✅ [PASSOU] Item adicionado ao carrinho")
+    print("[PASSOU] Item adicionado ao carrinho")
 
     driver.quit()
 

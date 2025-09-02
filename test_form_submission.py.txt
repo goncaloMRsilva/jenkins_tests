@@ -18,7 +18,7 @@ def test_form_submission():
     # Verifica mensagem de sucesso
     alert = driver.find_element(By.CLASS_NAME, "alert")
     assert "The form was successfully submitted!" in alert.text
-    print("✅ [PASSOU] Formulário submetido com sucesso")
+    print("[PASSOU] Formulário submetido com sucesso")
 
     driver.quit()
 
